@@ -8,8 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     container:
-      image: ghcr.io/astral-sh/uv:latest
+      image: ghcr.io/astral-sh/uv:debian
 
     steps:
       - name: Checkout repository
