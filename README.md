@@ -37,8 +37,8 @@ GitHub Desktop でリポジトリをクローンしてください．
 
 ### 3.3. Open Remote Container
 
-Visual Studio Code を開いたら右下に「Open in Container」というボタンが表示されるので，それをクリックしてください．
-もし表示されない場合は，左下の「><」アイコンをクリックして「Remote-Containers: Reopen in Container」を選択してください．
+Visual Studio Code でリポジトリを開いたら，右下に表示されるポップアップから「コンテナーで再度開く」というボタンを選択してください．
+もしポップアップが表示されない場合は，左下の「><」アイコンをクリックして「コンテナーで再度開く」を選択してください．
 これにより自動で開発環境が構築されます．
 
 ## 🚀 4. Usage
