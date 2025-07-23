@@ -31,7 +31,7 @@ Google Fonts に含まれるすべてのフォントについて，文字の収�
 
 GitHub Desktop でリポジトリをクローンしてください．
 
-### 3.2 Open in Visual Studio Code
+### 3.2. Open in Visual Studio Code
 
 リポジトリを Visual Studio Code で開いてください．
 
