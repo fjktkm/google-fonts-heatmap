@@ -7,7 +7,7 @@ Google Fonts に含まれるすべてのフォントについて，文字の収�
 - **縦軸**：フォント（対応文字数の多い順）
 - **横軸**：コードポイント（対応フォント数の多い順）
 
-| Plane Ceiling | Unicode Ceiling | Heatmap |
+| Plane Upper Bound | Unicode Upper Bound | Heatmap |
 | :---: | :---: | :---: |
 | General Scripts | 0x1FFF | ![0x1FFF](https://fjktkm.com/google-fonts-heatmap/google_font_heatmap_0x1FFF.png) |
 | CJK Symbols and Punctuation | 0x33FF | ![0x33FF](https://fjktkm.com/google-fonts-heatmap/google_font_heatmap_0x33FF.png) |
