@@ -17,8 +17,6 @@ THRESHOLDS = [
     0x9FFF,
     0xFFFF,
     0x1FFFF,
-    0x2FFFF,
-    0x3FFFF,
     0x10FFFF,
 ]
 MAX_NAME_LEN = 20
