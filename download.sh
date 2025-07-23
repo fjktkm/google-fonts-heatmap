@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-commit=6526fad630c078afb8bfb134f2efc77f2ccd7d17
 target=fonts
-url="https://github.com/google/fonts/archive/${commit}.tar.gz"
+url="https://github.com/google/fonts/archive/main.tar.gz"
 
 mkdir -p "$target"
 curl -L --progress-meter "$url" \
