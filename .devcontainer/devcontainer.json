@@ -1,0 +1,32 @@
+{
+	"name": "uv",
+	"image": "ghcr.io/astral-sh/uv:debian",
+	"mounts": [
+		{
+			"source": "uv-cache",
+			"target": "/root/.cache/uv",
+			"type": "volume"
+		},
+		{
+			"source": "google-fonts-heatmap-venv",
+			"target": "${containerWorkspaceFolder}/.venv",
+			"type": "volume"
+		},
+		{
+			"source": "google-fonts-heatmap-fonts",
+			"target": "${containerWorkspaceFolder}/fonts",
+			"type": "volume"
+		}
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"charliermarsh.ruff",
+				"ms-azuretools.vscode-docker",
+				"ms-python.python",
+				"tamasfe.even-better-toml"
+			]
+		}
+	},
+	"postCreateCommand": "uv venv --allow-existing && uv sync --frozen"
+}
