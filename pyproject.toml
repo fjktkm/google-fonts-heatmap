@@ -1,0 +1,25 @@
+[project]
+name = "google-fonts-heatmap"
+version = "0.1.0"
+description = "Heatmap of Google Fonts"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fonttools>=4.59.0",
+    "image>=1.5.33",
+    "numpy>=2.3.1",
+    "tqdm>=4.67.1",
+]
+
+[dependency-groups]
+dev = ["ruff>=0.12.4"]
+
+[tool.uv]
+link-mode = "copy"
+
+[tool.ruff]
+unsafe-fixes = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["D", "T", "EXE"]
