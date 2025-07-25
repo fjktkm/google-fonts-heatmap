@@ -4,6 +4,7 @@ from pathlib import Path
 import numpy as np
 from fontTools.ttLib import TTFont
 from PIL import Image
+from PIL.Image import Resampling
 from tqdm import tqdm
 
 logging.getLogger("fontTools").setLevel(logging.ERROR)
@@ -92,6 +93,14 @@ def main() -> None:
         output_path = out_dir / f"google_font_heatmap_0x{thr:04X}.png"
         img.save(output_path)
         print(f"Saved: {output_path} ({img.width}x{img.height})")
+
+        target_width = 1024
+        scale = target_width / img.width
+        thumb_size = (target_width, int(img.height * scale))
+        thumbnail_img = img.resize(thumb_size, Resampling.LANCZOS)
+        thumbnail_output_path = out_dir / f"google_font_heatmap_0x{thr:04X}_thumbnail.png"
+        thumbnail_img.save(thumbnail_output_path)
+        print(f"Saved: {thumbnail_output_path} ({thumbnail_img.width}x{thumbnail_img.height})")
 
 
 if __name__ == "__main__":
