@@ -9,12 +9,12 @@ Google Fonts に含まれるすべてのフォントについて，文字の収�
 
 | Plane Upper Bound | Unicode Upper Bound | Heatmap |
 | :---: | :---: | :---: |
-| General Scripts | 0x1FFF | [![](https://fjktkm.com/google-fonts-heatmap/google_font_heatmap_0x1FFF_thumbnail.png)](https://fjktkm.com/google-fonts-heatmap/google_font_heatmap_0x1FFF.png) |
-| CJK Symbols and Punctuation | 0x33FF | [![](https://fjktkm.com/google-fonts-heatmap/google_font_heatmap_0x33FF_thumbnail.png)](https://fjktkm.com/google-fonts-heatmap/google_font_heatmap_0x33FF.png) |
-| CJK Unified Ideographs | 0x9FFF | [![](https://fjktkm.com/google-fonts-heatmap/google_font_heatmap_0x9FFF_thumbnail.png)](https://fjktkm.com/google-fonts-heatmap/google_font_heatmap_0x9FFF.png) |
-| Basic Multilingual Plane | 0xFFFF | [![](https://fjktkm.com/google-fonts-heatmap/google_font_heatmap_0xFFFF_thumbnail.png)](https://fjktkm.com/google-fonts-heatmap/google_font_heatmap_0xFFFF.png) |
-| Supplementary Multilingual Plane | 0x1FFFF | [![](https://fjktkm.com/google-fonts-heatmap/google_font_heatmap_0x1FFFF_thumbnail.png)](https://fjktkm.com/google-fonts-heatmap/google_font_heatmap_0x1FFFF.png) |
-| Private Use Plane | 0x10FFFF | [![](https://fjktkm.com/google-fonts-heatmap/google_font_heatmap_0x10FFFF_thumbnail.png)](https://fjktkm.com/google-fonts-heatmap/google_font_heatmap_0x10FFFF.png) |
+| General Scripts | 0x1FFF | [![](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x1FFF_crop.png)](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x1FFF.png) |
+| CJK Symbols and Punctuation | 0x33FF | [![](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x33FF_crop.png)](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x33FF.png) |
+| CJK Unified Ideographs | 0x9FFF | [![](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x9FFF_crop.png)](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x9FFF.png) |
+| Basic Multilingual Plane | 0xFFFF | [![](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0xFFFF_crop.png)](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0xFFFF.png) |
+| Supplementary Multilingual Plane | 0x1FFFF | [![](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x1FFFF_crop.png)](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x1FFFF.png) |
+| Private Use Plane | 0x10FFFF | [![](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x10FFFF_crop.png)](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x10FFFF.png) |
 
 ## ✅ 2. Requirements
 
