@@ -1,4 +1,4 @@
-# 🔥 Heatmap of Google Fonts
+# 🔥 Glyph Coverage Heatmap for Google Fonts
 
 ## 📌 1. Overview
 
@@ -71,7 +71,7 @@ If you find this repository useful in your research, please cite:
 ```
 @misc{fjktkm2025googlefontsheatmap,
   author       = {{Takumu Fujioka}},
-  title        = {{google-fonts-heatmap}: Heatmap of Glyph Coverage in Google Fonts},
+  title        = {{google-fonts-heatmap}: Glyph Coverage Heatmap for Google Fonts},
   howpublished = {GitHub repository, \url{https://github.com/fjktkm/google-fonts-heatmap}},
   year         = {2025},
 }
