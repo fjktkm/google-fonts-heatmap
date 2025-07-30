@@ -20,10 +20,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install zip utility
+      - name: Install apt packages
         run: |
-          sudo apt-get update
-          sudo apt-get install -y zip
+          apt-get update
+          apt-get install -y zip
 
       - name: Download Google Fonts
         run: sh download.sh
@@ -34,7 +34,7 @@ jobs:
       - name: Create heatmap
         run: uv run main.py
 
-      - name: Archive Output
+      - name: Archive output
         run: zip -r output/google_fonts_heatmap.zip output/
 
       - name: Create GitHub Release
