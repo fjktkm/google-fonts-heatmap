@@ -89,13 +89,13 @@ def main() -> None:
         img = create_image(heatmap, threshold=thr)
         out_dir = Path("output")
         out_dir.mkdir(exist_ok=True)
-        output_path = out_dir / f"google_fonts_heatmap_0x{thr:06X}.png"
+        output_path = out_dir / f"google_fonts_heatmap_0x{thr:04X}.png"
         img.save(output_path)
         print(f"Saved: {output_path} ({img.width}x{img.height})")
 
         min_side = min(img.width, img.height)
         crop = img.crop((0, 0, min_side, min_side))
-        crop_output_path = out_dir / f"google_fonts_heatmap_0x{thr:06X}_crop.png"
+        crop_output_path = out_dir / f"google_fonts_heatmap_0x{thr:04X}_crop.png"
         crop.save(crop_output_path)
         print(f"Saved: {crop_output_path} ({crop.width}x{crop.height})")
 

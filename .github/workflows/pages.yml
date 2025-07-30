@@ -30,19 +30,19 @@ jobs:
       - name: Create heatmap
         run: uv run main.py
 
-      - name: Archive output
-        run: zip -r output/google_fonts_heatmap.zip output/
-
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: output
 
+      - name: Archive output
+        run: zip -r output/google_fonts_heatmap.zip output/
+
       - name: Create GitHub Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create v${{ github.run_number }} output/*.png output/google_fonts_heatmap.zip \
+          gh release create v${{ github.run_number }} output/google_fonts_heatmap.zip \
             --target "${{ github.sha }}" \
             --title "v${{ github.run_number }}" \
             --generate-notes
