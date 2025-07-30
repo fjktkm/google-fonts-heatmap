@@ -2,21 +2,22 @@
 
 ## 📌 1. Overview
 
-Google Fonts に含まれるすべてのフォントについて，文字の収録状況をヒートマップで可視化します．
+[Google Fonts](https://github.com/google/fonts) に含まれるすべてのフォントについて，文字の収録状況をヒートマップで可視化します．
 
 - **縦軸**：フォント（対応文字数の多い順）
 - **横軸**：コードポイント（対応フォント数の多い順）
 
-| Plane Upper Bound | Unicode Upper Bound | Heatmap |
-| :---: | :---: | :---: |
-| General Scripts | 0x1FFF | [![](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x1FFF_crop.png)](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x1FFF.png) |
-| CJK Symbols and Punctuation | 0x33FF | [![](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x33FF_crop.png)](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x33FF.png) |
-| CJK Unified Ideographs | 0x9FFF | [![](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x9FFF_crop.png)](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x9FFF.png) |
-| Basic Multilingual Plane | 0xFFFF | [![](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0xFFFF_crop.png)](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0xFFFF.png) |
-| Supplementary Multilingual Plane | 0x1FFFF | [![](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x1FFFF_crop.png)](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x1FFFF.png) |
-| Private Use Plane | 0x10FFFF | [![](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x10FFFF_crop.png)](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x10FFFF.png) |
+| ![](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x1FFF.png) | ![](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x1FFF_crop.png) |
+| :---: | :---: |
+| Full-Size | Square-Cropped |
 
-## ✅ 2. Requirements
+## 📥 2. Download
+
+ダウンロードは [こちら](https://github.com/fjktkm/google-fonts-heatmap/releases/latest/download/google_fonts_heatmap.zip)
+
+Please download from [here](https://github.com/fjktkm/google-fonts-heatmap/releases/latest/download/google_fonts_heatmap.zip)
+
+## ✅ 3. Requirements
 
 推奨する開発環境の構築手順に必要なものは次のとおりです：
 
@@ -25,25 +26,25 @@ Google Fonts に含まれるすべてのフォントについて，文字の収�
 - Remote Development Extension Pack
 - Docker
 
-## 📦 3. Installation
+## 📦 4. Installation
 
-### 3.1. Clone the repository
+### 4.1. Clone the repository
 
 GitHub Desktop でリポジトリをクローンしてください．
 
-### 3.2. Open in Visual Studio Code
+### 4.2. Open in Visual Studio Code
 
 リポジトリを Visual Studio Code で開いてください．
 
-### 3.3. Open Remote Container
+### 4.3. Open Remote Container
 
 Visual Studio Code でリポジトリを開いたら，右下に表示されるポップアップから「コンテナーで再度開く」というボタンを選択してください．
 もしポップアップが表示されない場合は，左下の「><」アイコンをクリックして「コンテナーで再度開く」を選択してください．
 これにより自動で開発環境が構築されます．
 
-## 🚀 4. Usage
+## 🚀 5. Usage
 
-### 4.1. Download Google Fonts
+### 5.1. Download Google Fonts
 
 Google Fonts のフォントをダウンロードします．
 次のコマンドを実行してください．
@@ -52,7 +53,7 @@ Google Fonts のフォントをダウンロードします．
 sh download.sh
 ```
 
-### 4.2. Generate Heatmap
+### 5.2. Generate Heatmap
 
 ヒートマップを生成します．
 次のコマンドを実行してください．
@@ -62,3 +63,16 @@ uv run main.py
 ```
 
 生成したヒートマップは `output` ディレクトリに保存されます．
+
+## 📑 6. Citation
+
+If you find this figure useful in your research, please cite:
+
+```
+@misc{fjktkm2025googlefontsheatmap,
+  author       = {{Takumu Fujioka}},
+  title        = {{google-fonts-heatmap}: Heatmap of Glyph Coverage in Google Fonts},
+  howpublished = {GitHub repository, \url{https://github.com/fjktkm/google-fonts-heatmap}},
+  year         = {2025},
+}
+```
