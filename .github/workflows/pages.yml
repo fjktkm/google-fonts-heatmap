@@ -13,22 +13,18 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    container:
-      image: ghcr.io/astral-sh/uv:debian
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install apt packages
-        run: |
-          apt-get update
-          apt-get install -y gh zip
-
       - name: Download Google Fonts
         run: sh download.sh
 
-      - name: Install project dependencies
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Install the project
         run: uv sync --frozen --no-dev
 
       - name: Create heatmap
@@ -37,19 +33,19 @@ jobs:
       - name: Archive output
         run: zip -r output/google_fonts_heatmap.zip output/
 
-      - name: Create GitHub Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh release create v${{ github.run_number }} output/* \
-            --target "${{ github.sha }}" \
-            --title "v${{ github.run_number }}" \
-            --generate-notes
-
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: output
+
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create v${{ github.run_number }} output/*.png output/google_fonts_heatmap.zip \
+            --target "${{ github.sha }}" \
+            --title "v${{ github.run_number }}" \
+            --generate-notes
 
   deploy:
     needs: build
