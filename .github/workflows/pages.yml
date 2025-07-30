@@ -2,13 +2,17 @@ name: GitHub Pages
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
   schedule:
     - cron: '0 9 * * 1'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
     container:
       image: ghcr.io/astral-sh/uv:debian
 
@@ -24,6 +28,18 @@ jobs:
 
       - name: Create heatmap
         run: uv run main.py
+
+      - name: Archive Output
+        run: zip -r output/google_fonts_heatmap.zip output/
+
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create v${{ github.run_number }} output/* \
+            --target "${{ github.sha }}" \
+            --title "v${{ github.run_number }}" \
+            --generate-notes
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
