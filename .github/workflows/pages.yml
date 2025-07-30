@@ -23,7 +23,7 @@ jobs:
       - name: Install apt packages
         run: |
           apt-get update
-          apt-get install -y zip
+          apt-get install -y gh zip
 
       - name: Download Google Fonts
         run: sh download.sh
