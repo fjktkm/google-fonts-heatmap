@@ -69,7 +69,7 @@ uv run main.py
 If you find this repository useful in your research, please cite:
 
 ```
-@misc{fjktkm2025googlefontsheatmap,
+@misc{fujioka2025googlefontsheatmap,
   author       = {{Takumu Fujioka}},
   title        = {{google-fonts-heatmap}: Glyph Coverage Heatmap for Google Fonts},
   howpublished = {GitHub repository, \url{https://github.com/fjktkm/google-fonts-heatmap}},
