@@ -2,14 +2,12 @@
 
 ## 📌 1. Overview
 
+![](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap.png)
+
 [Google Fonts](https://github.com/google/fonts) に含まれるすべてのフォントについて，文字の収録状況をヒートマップで可視化します．
 
 - **縦軸**：フォント（対応文字数の多い順）
 - **横軸**：コードポイント（対応フォント数の多い順）
-
-| ![](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x1FFF.png) | ![](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap_0x1FFF_crop.png) |
-| :---: | :---: |
-| Full-Size | Square-Cropped |
 
 ## 📥 2. Download
 
