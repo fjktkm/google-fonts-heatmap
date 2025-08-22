@@ -13,7 +13,7 @@ logging.getLogger("fontTools").setLevel(logging.ERROR)
 FONT_ROOT = Path("./fonts")
 LICENSE_DIRS = ("apache", "ofl", "ufl")
 EXCLUDE_KEYWORDS = ("adobeblank",)
-CHARACTER_SIZE = 5000
+CHARACTER_SIZE = 0x1000
 
 
 def extract_cps(fp: Path) -> list[int]:
