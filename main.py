@@ -10,9 +10,10 @@ from tqdm import tqdm
 
 logging.getLogger("fontTools").setLevel(logging.ERROR)
 
-LICENSE_DIRS = ("apache", "ofl", "ufl")
 FONT_ROOT = Path("./fonts")
+LICENSE_DIRS = ("apache", "ofl", "ufl")
 EXCLUDE_KEYWORDS = ("adobeblank",)
+CHARACTER_SIZE = 5000
 
 
 def extract_cps(fp: Path) -> list[int]:
@@ -25,40 +26,34 @@ def extract_cps(fp: Path) -> list[int]:
 
 def compute_heatmap(font_paths: list[Path]) -> np.ndarray:
     n_fonts = len(font_paths)
+
     with ProcessPoolExecutor() as ex:
         fonts_cps = list(
             tqdm(ex.map(extract_cps, font_paths), total=n_fonts, unit="font"),
         )
+
     union_cps: set[int] = set()
+
     for cps in fonts_cps:
         union_cps.update(cps)
+
     sorted_cps = np.array(sorted(union_cps), dtype=np.int32)
     cp_to_idx = {cp: i for i, cp in enumerate(sorted_cps.tolist())}
     raw = np.zeros((n_fonts, len(sorted_cps)), dtype=bool)
+
     for i, cps in enumerate(fonts_cps):
         idxs = [cp_to_idx[cp] for cp in cps]
         raw[i, idxs] = True
+
     return raw
 
 
-def crop_heatmap(hm: np.ndarray) -> np.ndarray:
-    font_counts = hm.sum(axis=1)
-    cp_counts = hm.sum(axis=0)
-    valid_fonts = font_counts > 0
-    valid_cps = cp_counts > 0
-    hm = hm[valid_fonts][:, valid_cps]
-
+def crop_heatmap(hm: np.ndarray, character_size: int) -> np.ndarray:
     order_cps = np.argsort(hm.sum(axis=0))[::-1]
+    hm = hm[:, order_cps]
+    hm = hm[:, :character_size]
     order_fonts = np.argsort(hm.sum(axis=1))[::-1]
-    hm = hm[np.ix_(order_fonts, order_cps)]
-
-    n_rows, n_cols = hm.shape
-    side = min(n_rows, n_cols)
-    hm = hm[:side, :side]
-
-    order_cps_sq = np.argsort(hm.sum(axis=0))[::-1]
-    order_fonts_sq = np.argsort(hm.sum(axis=1))[::-1]
-    return hm[np.ix_(order_fonts_sq, order_cps_sq)]
+    return hm[order_fonts]
 
 
 def plot_jointplot(hm: np.ndarray, out_dir: Path, stem: str) -> None:
@@ -88,8 +83,11 @@ def plot_jointplot(hm: np.ndarray, out_dir: Path, stem: str) -> None:
 
     g.ax_marg_x.set_xlim(-0.5, n_cols - 0.5)
     g.ax_marg_y.set_ylim(-0.5, n_rows - 0.5)
-    g.set_axis_labels("Code-point (font support↓)", "Font (coverage↓)")
-    g.figure.suptitle("Glyph Coverage Heatmap for Google Fonts")
+    g.set_axis_labels(
+        "Code point index (sorted by font support)",
+        "Fonts (sorted by coverage)",
+    )
+    g.figure.suptitle(f"Google Fonts Coverage (Top {n_cols} code points)")
     plt.tight_layout()
 
     out_dir.mkdir(exist_ok=True)
@@ -109,13 +107,9 @@ def main() -> None:
     ]
 
     heatmap = compute_heatmap(font_paths)
-    heatmap = crop_heatmap(heatmap)
+    heatmap = crop_heatmap(heatmap, CHARACTER_SIZE)
     out_dir = Path("output")
-    plot_jointplot(
-        heatmap,
-        out_dir,
-        stem="google_fonts_heatmap",
-    )
+    plot_jointplot(heatmap, out_dir, stem="google_fonts_heatmap")
 
 
 if __name__ == "__main__":
