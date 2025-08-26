@@ -67,13 +67,12 @@ def plot_jointplot(hm: np.ndarray, out_dir: Path, stem: str) -> None:
         y=r,
         height=7,
         kind="hist",
-        joint_kws={"bins": (n_cols, n_rows), "cmap": "light:b"},
+        joint_kws={"bins": (n_cols, n_rows), "cmap": "light:b", "alpha": 0.75},
+        marginal_kws={"linewidth": 0},
     )
 
     for ax in (g.ax_marg_x, g.ax_marg_y):
         for p in ax.patches:
-            p.set_alpha(1.0)
-            p.set_linewidth(0)
             p.set_rasterized(True)
 
     for col in g.ax_joint.collections:
