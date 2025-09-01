@@ -18,6 +18,12 @@ CHARACTER_SIZE = 0x1000
 
 def extract_cps(fp: Path) -> list[int]:
     font = TTFont(fp, lazy=True)
+
+    reader = getattr(font, "reader", None)
+    tables = getattr(reader, "tables", {})
+    if reader and tables and "post" in tables:
+        del tables["post"]
+
     cmap = font.getBestCmap() or {}
     cps = list(cmap.keys())
     font.close()
