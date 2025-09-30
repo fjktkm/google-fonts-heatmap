@@ -64,7 +64,7 @@ uv run main.py
 
 ## 📑 6. Citation
 
-If you find this repository useful in your research, please cite:
+If you find this repository useful in your work, please consider citing the following BibTeX entry:
 
 ```
 @misc{fujioka2025googlefontsheatmap,
