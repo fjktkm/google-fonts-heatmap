@@ -10,9 +10,7 @@ from tqdm import tqdm
 
 logging.getLogger("fontTools").setLevel(logging.ERROR)
 
-FONT_ROOT = Path("./fonts")
-LICENSE_DIRS = ("apache", "ofl", "ufl")
-EXCLUDE_KEYWORDS = ("adobeblank",)
+ROOT_DIR = Path("./fonts")
 CHARACTER_SIZE = 0x1000
 
 
@@ -104,13 +102,7 @@ def plot_jointplot(hm: np.ndarray, out_dir: Path, stem: str) -> None:
 
 
 def main() -> None:
-    font_paths = [
-        fp
-        for lic in LICENSE_DIRS
-        for fp in (FONT_ROOT / lic).rglob("*.ttf")
-        if not any(kw in str(fp) for kw in EXCLUDE_KEYWORDS)
-    ]
-
+    font_paths = list(ROOT_DIR.rglob("*.[tToO][tT][fF]"))
     heatmap = compute_heatmap(font_paths)
     heatmap = crop_heatmap(heatmap, CHARACTER_SIZE)
     out_dir = Path("output")
