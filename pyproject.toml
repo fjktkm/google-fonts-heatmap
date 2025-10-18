@@ -16,9 +16,6 @@ dependencies = [
 [dependency-groups]
 dev = ["ruff>=0.12.4"]
 
-[tool.uv]
-link-mode = "copy"
-
 [tool.ruff]
 unsafe-fixes = true
 

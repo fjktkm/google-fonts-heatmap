@@ -1,6 +1,9 @@
 {
 	"name": "uv",
-	"image": "ghcr.io/astral-sh/uv:debian",
+	"image": "ghcr.io/astral-sh/uv:python3.13-trixie",
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {}
+	},
 	"mounts": [
 		{
 			"source": "uv-cache",
@@ -17,15 +20,17 @@
 			"type": "volume"
 		}
 	],
+	"containerEnv": {
+		"UV_LINK_MODE": "copy"
+	},
+	"postCreateCommand": "uv sync",
 	"customizations": {
 		"vscode": {
 			"extensions": [
 				"charliermarsh.ruff",
-				"ms-azuretools.vscode-docker",
 				"ms-python.python",
 				"tamasfe.even-better-toml"
 			]
 		}
-	},
-	"postCreateCommand": "uv sync"
+	}
 }
