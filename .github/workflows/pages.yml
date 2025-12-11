@@ -28,10 +28,13 @@ jobs:
         run: uv sync --frozen --no-dev
 
       - name: Create coverage heatmap
-        run: uv run src/google_fonts_heatmap/coverage_heatmap.py
+        run: uv run src/google_fonts_heatmap/coverage_jointplot.py
 
       - name: Create outline length histogram
-        run: uv run src/google_fonts_heatmap/outline_len_hist.py
+        run: uv run src/google_fonts_heatmap/outline_len_histplot.py
+
+      - name: Create upem countplot
+        run: uv run src/google_fonts_heatmap/upem_countplot.py
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
