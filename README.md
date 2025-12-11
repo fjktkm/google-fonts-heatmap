@@ -66,7 +66,7 @@ uv run src/google_fonts_heatmap/coverage_heatmap.py
 
 生成したヒートマップは `output` ディレクトリに保存されます．
 
-### 5.3. (Optional) Outline length histogram
+### 5.3. (Optional) Outline Length Histogram
 
 アウトラインの描画コマンド長の分布を確認したい場合は次のコマンドを実行してください（おまけ）．
 
