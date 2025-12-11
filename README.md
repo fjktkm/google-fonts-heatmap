@@ -11,13 +11,10 @@
 
 ## 📥 2. Download
 
-プレビューはこちら [PNG](https://fjktkm.github.io/google-fonts-heatmap/coverage_jointplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/coverage_jointplot.pdf)
-
-Please find the preview here [PNG](https://fjktkm.github.io/google-fonts-heatmap/coverage_jointplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/coverage_jointplot.pdf)
-
-ダウンロードは [こちら](https://github.com/fjktkm/google-fonts-heatmap/releases/latest/download/output.zip)
-
-Please download from [here](https://github.com/fjktkm/google-fonts-heatmap/releases/latest/download/output.zip)
+- All: [ZIP](https://github.com/fjktkm/google-fonts-heatmap/releases/latest/download/output.zip)
+- Coverage Jointplot: [PNG](https://fjktkm.github.io/google-fonts-heatmap/coverage_jointplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/coverage_jointplot.pdf)
+- Outline Length Histogram: [PNG](https://fjktkm.github.io/google-fonts-heatmap/outline_len_histplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/outline_len_histplot.pdf)
+- UPEM Countplot: [PNG](https://fjktkm.github.io/google-fonts-heatmap/upem_countplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/upem_countplot.pdf)
 
 ## ✅ 3. Requirements
 
