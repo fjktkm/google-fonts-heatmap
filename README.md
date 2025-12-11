@@ -2,7 +2,7 @@
 
 ## 📌 1. Overview
 
-![](https://fjktkm.com/google-fonts-heatmap/google_fonts_heatmap.png)
+[![](https://fjktkm.github.io/google-fonts-heatmap/google_fonts_heatmap.png)](https://fjktkm.github.io/google-fonts-heatmap/google_fonts_heatmap.png)
 
 [Google Fonts](https://github.com/google/fonts) に含まれるすべてのフォントについて，文字の収録状況をヒートマップで可視化します．
 
@@ -10,6 +10,10 @@
 - **横軸**：コードポイント（対応フォント数の多い順）
 
 ## 📥 2. Download
+
+プレビューはこちら [PNG](https://fjktkm.github.io/google-fonts-heatmap/google_fonts_heatmap.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/google_fonts_heatmap.pdf)
+
+Please find the preview here [PNG](https://fjktkm.github.io/google-fonts-heatmap/google_fonts_heatmap.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/google_fonts_heatmap.pdf)
 
 ダウンロードは [こちら](https://github.com/fjktkm/google-fonts-heatmap/releases/latest/download/google_fonts_heatmap.zip)
 
