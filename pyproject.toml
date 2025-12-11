@@ -22,3 +22,6 @@ unsafe-fixes = true
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = ["D", "T", "EXE"]
+
+[tool.ruff.lint.per-file-ignores]
+"glyph_length_hist.py" = ["N802", "ARG002"]
