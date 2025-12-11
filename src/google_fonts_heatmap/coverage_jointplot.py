@@ -49,7 +49,7 @@ def plot_jointplot(fonts_cps: list[list[int]], out_dir: Path, stem: str) -> None
         y=y_vals,
         height=7,
         kind="hist",
-        joint_kws={"bins": 1024},
+        joint_kws={"bins": 512},
         marginal_kws={"bins": 64},
     )
 
