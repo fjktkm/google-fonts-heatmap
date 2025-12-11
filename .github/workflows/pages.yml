@@ -27,8 +27,11 @@ jobs:
       - name: Install the project
         run: uv sync --frozen --no-dev
 
-      - name: Create heatmap
-        run: uv run main.py
+      - name: Create coverage heatmap
+        run: uv run src/google_fonts_heatmap/coverage_heatmap.py
+
+      - name: Create outline length histogram
+        run: uv run src/google_fonts_heatmap/outline_len_hist.py
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -36,13 +39,13 @@ jobs:
           path: output
 
       - name: Archive output
-        run: zip -r output/google_fonts_heatmap.zip output/
+        run: zip -r output.zip output/
 
       - name: Create GitHub Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create v${{ github.run_number }} output/google_fonts_heatmap.zip \
+          gh release create v${{ github.run_number }} output.zip \
             --target "${{ github.sha }}" \
             --title "v${{ github.run_number }}" \
             --generate-notes

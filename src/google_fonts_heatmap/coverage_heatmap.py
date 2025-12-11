@@ -73,7 +73,7 @@ def main() -> None:
     font_paths = list(ROOT_DIR.rglob("*.[tToO][tT][fF]"))
     fonts_cps = load_fonts_codepoints(font_paths)
     out_dir = Path("output")
-    plot_jointplot(fonts_cps, out_dir, stem="google_fonts_heatmap")
+    plot_jointplot(fonts_cps, out_dir, stem="coverage_heatmap")
 
 
 if __name__ == "__main__":

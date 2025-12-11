@@ -2,7 +2,7 @@
 
 ## 📌 1. Overview
 
-[![](https://fjktkm.github.io/google-fonts-heatmap/google_fonts_heatmap.png)](https://fjktkm.github.io/google-fonts-heatmap/google_fonts_heatmap.png)
+[![](https://fjktkm.github.io/google-fonts-heatmap/coverage_heatmap.png)](https://fjktkm.github.io/google-fonts-heatmap/coverage_heatmap.png)
 
 [Google Fonts](https://github.com/google/fonts) に含まれるすべてのフォントについて，文字の収録状況をヒートマップで可視化します．
 
@@ -11,13 +11,13 @@
 
 ## 📥 2. Download
 
-プレビューはこちら [PNG](https://fjktkm.github.io/google-fonts-heatmap/google_fonts_heatmap.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/google_fonts_heatmap.pdf)
+プレビューはこちら [PNG](https://fjktkm.github.io/google-fonts-heatmap/coverage_heatmap.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/coverage_heatmap.pdf)
 
-Please find the preview here [PNG](https://fjktkm.github.io/google-fonts-heatmap/google_fonts_heatmap.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/google_fonts_heatmap.pdf)
+Please find the preview here [PNG](https://fjktkm.github.io/google-fonts-heatmap/coverage_heatmap.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/coverage_heatmap.pdf)
 
-ダウンロードは [こちら](https://github.com/fjktkm/google-fonts-heatmap/releases/latest/download/google_fonts_heatmap.zip)
+ダウンロードは [こちら](https://github.com/fjktkm/google-fonts-heatmap/releases/latest/download/output.zip)
 
-Please download from [here](https://github.com/fjktkm/google-fonts-heatmap/releases/latest/download/google_fonts_heatmap.zip)
+Please download from [here](https://github.com/fjktkm/google-fonts-heatmap/releases/latest/download/output.zip)
 
 ## ✅ 3. Requirements
 
@@ -61,10 +61,18 @@ sh download.sh
 次のコマンドを実行してください．
 
 ```bash
-uv run main.py
+uv run src/google_fonts_heatmap/coverage_heatmap.py
 ```
 
 生成したヒートマップは `output` ディレクトリに保存されます．
+
+### 5.3. (Optional) Outline length histogram
+
+アウトラインの描画コマンド長の分布を確認したい場合は次のコマンドを実行してください（おまけ）．
+
+```bash
+uv run src/google_fonts_heatmap/outline_len_hist.py
+```
 
 ## 📑 6. Citation
 
