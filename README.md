@@ -2,7 +2,7 @@
 
 ## 📌 1. Overview
 
-[![](https://fjktkm.github.io/google-fonts-heatmap/coverage_heatmap.png)](https://fjktkm.github.io/google-fonts-heatmap/coverage_heatmap.png)
+[![](https://fjktkm.github.io/google-fonts-heatmap/coverage_jointplot.png)](https://fjktkm.github.io/google-fonts-heatmap/coverage_jointplot.png)
 
 [Google Fonts](https://github.com/google/fonts) に含まれるすべてのフォントについて，文字の収録状況をヒートマップで可視化します．
 
@@ -11,9 +11,9 @@
 
 ## 📥 2. Download
 
-プレビューはこちら [PNG](https://fjktkm.github.io/google-fonts-heatmap/coverage_heatmap.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/coverage_heatmap.pdf)
+プレビューはこちら [PNG](https://fjktkm.github.io/google-fonts-heatmap/coverage_jointplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/coverage_jointplot.pdf)
 
-Please find the preview here [PNG](https://fjktkm.github.io/google-fonts-heatmap/coverage_heatmap.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/coverage_heatmap.pdf)
+Please find the preview here [PNG](https://fjktkm.github.io/google-fonts-heatmap/coverage_jointplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/coverage_jointplot.pdf)
 
 ダウンロードは [こちら](https://github.com/fjktkm/google-fonts-heatmap/releases/latest/download/output.zip)
 
@@ -61,17 +61,25 @@ sh download.sh
 次のコマンドを実行してください．
 
 ```bash
-uv run src/google_fonts_heatmap/coverage_heatmap.py
+uv run src/google_fonts_heatmap/coverage_jointplot.py
 ```
 
 生成したヒートマップは `output` ディレクトリに保存されます．
 
-### 5.3. (Optional) Outline Length Histogram
+### 5.3. (Optional) Bonus Plots
 
-アウトラインの描画コマンド長の分布を確認したい場合は次のコマンドを実行してください（おまけ）．
+おまけで以下の可視化も用意しています．
+
+**Outline Length Histogram**：アウトラインの描画コマンド長の分布を確認するには次のコマンドを実行してください．
 
 ```bash
-uv run src/google_fonts_heatmap/outline_len_hist.py
+uv run src/google_fonts_heatmap/outline_len_histplot.py
+```
+
+**UPEM Count Plot**：フォントごとの unitsPerEm の頻度を調べるには次のコマンドを実行してください．
+
+```bash
+uv run src/google_fonts_heatmap/upem_countplot.py
 ```
 
 ## 📑 6. Citation

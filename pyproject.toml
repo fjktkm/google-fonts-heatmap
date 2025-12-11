@@ -24,4 +24,5 @@ select = ["ALL"]
 ignore = ["D", "T", "EXE"]
 
 [tool.ruff.lint.per-file-ignores]
-"src/google_fonts_heatmap/outline_len_hist.py" = ["N802", "ARG002"]
+"src/google_fonts_heatmap/outline_len_histplot.py" = ["N802", "ARG002"]
+"src/google_fonts_heatmap/outline_coord_jointplot.py" = ["N802"]

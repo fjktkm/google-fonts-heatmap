@@ -48,8 +48,8 @@ def plot_jointplot(fonts_cps: list[list[int]], out_dir: Path, stem: str) -> None
         x=x_vals,
         y=y_vals,
         height=7,
-        kind="scatter",
-        joint_kws={"s": 0.01, "edgecolor": "none", "rasterized": True},
+        kind="hist",
+        joint_kws={"bins": 1024},
         marginal_kws={"bins": 64},
     )
 
@@ -73,7 +73,7 @@ def main() -> None:
     font_paths = list(ROOT_DIR.rglob("*.[tToO][tT][fF]"))
     fonts_cps = load_fonts_codepoints(font_paths)
     out_dir = Path("output")
-    plot_jointplot(fonts_cps, out_dir, stem="coverage_heatmap")
+    plot_jointplot(fonts_cps, out_dir, stem="coverage_jointplot")
 
 
 if __name__ == "__main__":

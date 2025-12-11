@@ -96,7 +96,7 @@ def main() -> None:
     font_paths = list(ROOT_DIR.rglob("*.[tToO][tT][fF]"))
     counts = collect_all_command_counts(font_paths)
     out_dir = Path("output")
-    plot_histogram(counts, out_dir, stem="outline_len_hist")
+    plot_histogram(counts, out_dir, stem="outline_len_histplot")
 
 
 if __name__ == "__main__":
