@@ -1,31 +1,19 @@
-from __future__ import annotations
-
-import logging
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
-from fontTools.ttLib import TTFont
-from tqdm import tqdm
 
-logging.getLogger("fontTools").setLevel(logging.ERROR)
+from google_fonts_heatmap import _skrifa
 
 ROOT_DIR = Path("./fonts")
 
 sns.set_theme(style="white")
 
 
-def upem_from_font(fp: Path) -> int:
-    font = TTFont(fp, lazy=True)
-    upem_raw = getattr(font["head"], "unitsPerEm", 1)
-    upem = int(upem_raw)
-    font.close()
-    return upem
-
-
 def collect_upems(font_paths: list[Path]) -> list[int]:
-    return [upem_from_font(fp) for fp in tqdm(font_paths, unit="font")]
+    upems = _skrifa.units_per_em(font_paths)
+    return [int(value) for value in upems]
 
 
 def plot_upem_count(upems: list[int], out_dir: Path, stem: str) -> None:

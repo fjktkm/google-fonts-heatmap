@@ -1,14 +1,10 @@
-import logging
-from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
-from fontTools.ttLib import TTFont
-from tqdm import tqdm
 
-logging.getLogger("fontTools").setLevel(logging.ERROR)
+from google_fonts_heatmap import _skrifa
 
 ROOT_DIR = Path("./fonts")
 CHARACTER_SIZE = 0x10000
@@ -16,30 +12,13 @@ CHARACTER_SIZE = 0x10000
 sns.set_theme(style="white")
 
 
-def extract_cps(fp: Path) -> list[int]:
-    font = TTFont(fp, lazy=True)
-    cmap = font.getBestCmap() or {}
-    cps = [cp for cp in cmap if cp < CHARACTER_SIZE]
-    font.close()
-    return cps
-
-
 def load_fonts_codepoints(font_paths: list[Path]) -> list[list[int]]:
-    with ProcessPoolExecutor() as ex:
-        fonts_cps = list(
-            tqdm(
-                ex.map(extract_cps, font_paths),
-                total=len(font_paths),
-                unit="font",
-            ),
-        )
+    fonts_cps = _skrifa.coverage_bmp(font_paths, CHARACTER_SIZE)
     return sorted(fonts_cps, key=len, reverse=True)
 
 
 def plot_jointplot(fonts_cps: list[list[int]], out_dir: Path, stem: str) -> None:
-    x_vals = np.concatenate(
-        [np.asarray(cps, dtype=np.int32) for cps in fonts_cps],
-    )
+    x_vals = np.concatenate([np.asarray(cps, dtype=np.int32) for cps in fonts_cps])
     y_vals = np.concatenate(
         [np.full(len(cps), i, dtype=np.int32) for i, cps in enumerate(fonts_cps)],
     )

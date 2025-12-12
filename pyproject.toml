@@ -1,3 +1,7 @@
+[build-system]
+requires = ["maturin>=1.8,<2.0"]
+build-backend = "maturin"
+
 [project]
 name = "google-fonts-heatmap"
 version = "0.1.0"
@@ -5,16 +9,19 @@ description = "Heatmap of Google Fonts"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "fonttools>=4.59.0",
-    "image>=1.5.33",
     "matplotlib>=3.10.5",
     "numpy>=2.3.1",
     "seaborn>=0.13.2",
-    "tqdm>=4.67.1",
 ]
 
 [dependency-groups]
-dev = ["ruff>=0.12.4"]
+dev = [
+    "ruff>=0.12.4",
+    "maturin>=1.8.0",
+]
+
+[tool.maturin]
+module-name = "google_fonts_heatmap._skrifa"
 
 [tool.ruff]
 unsafe-fixes = true
@@ -24,5 +31,5 @@ select = ["ALL"]
 ignore = ["D", "T", "EXE"]
 
 [tool.ruff.lint.per-file-ignores]
-"src/google_fonts_heatmap/outline_len_histplot.py" = ["N802", "ARG002"]
-"src/google_fonts_heatmap/outline_coord_jointplot.py" = ["N802"]
+"google_fonts_heatmap/outline_len_histplot.py" = ["N802", "ARG002"]
+"google_fonts_heatmap/outline_coord_jointplot.py" = ["N802"]

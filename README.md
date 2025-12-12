@@ -52,31 +52,40 @@ Google Fonts のフォントをダウンロードします．
 sh download.sh
 ```
 
-### 5.2. Generate Heatmap
+### 5.2. Build the Skrifa extension (first run only)
+
+Rust 製の Skrifa バックエンドをビルドし，Python から利用できるようにします．
+初回のみ，次のコマンドを実行してください．
+
+```bash
+uv run maturin develop --release
+```
+
+### 5.3. Generate Heatmap
 
 ヒートマップを生成します．
 次のコマンドを実行してください．
 
 ```bash
-uv run src/google_fonts_heatmap/coverage_jointplot.py
+uv run google_fonts_heatmap/coverage_jointplot.py
 ```
 
 生成したヒートマップは `output` ディレクトリに保存されます．
 
-### 5.3. (Optional) Bonus Plots
+### 5.4. (Optional) Bonus Plots
 
 おまけで以下の可視化も用意しています．
 
 **Outline Length Histogram**：アウトラインの描画コマンド長の分布を確認するには次のコマンドを実行してください．
 
 ```bash
-uv run src/google_fonts_heatmap/outline_len_histplot.py
+uv run google_fonts_heatmap/outline_len_histplot.py
 ```
 
 **UPEM Count Plot**：フォントごとの unitsPerEm の頻度を調べるには次のコマンドを実行してください．
 
 ```bash
-uv run src/google_fonts_heatmap/upem_countplot.py
+uv run google_fonts_heatmap/upem_countplot.py
 ```
 
 ## 📑 6. Citation

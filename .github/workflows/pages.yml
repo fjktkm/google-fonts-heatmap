@@ -25,16 +25,19 @@ jobs:
         uses: astral-sh/setup-uv@v6
 
       - name: Install the project
-        run: uv sync --frozen --no-dev
+        run: uv sync --frozen
+
+      - name: Build Skrifa extension
+        run: uv run maturin develop --release
 
       - name: Create coverage heatmap
-        run: uv run src/google_fonts_heatmap/coverage_jointplot.py
+        run: uv run google_fonts_heatmap/coverage_jointplot.py
 
       - name: Create outline length histogram
-        run: uv run src/google_fonts_heatmap/outline_len_histplot.py
+        run: uv run google_fonts_heatmap/outline_len_histplot.py
 
       - name: Create upem countplot
-        run: uv run src/google_fonts_heatmap/upem_countplot.py
+        run: uv run google_fonts_heatmap/upem_countplot.py
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
