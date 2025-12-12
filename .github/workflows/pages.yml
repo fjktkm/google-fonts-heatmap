@@ -42,6 +42,9 @@ jobs:
       - name: Create weight countplot
         run: uv run google_fonts_heatmap/weight_countplot.py
 
+      - name: Create outline command barplot
+        run: uv run google_fonts_heatmap/outline_command_barplot.py
+
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

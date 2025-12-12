@@ -2,12 +2,12 @@ use std::fs;
 use std::path::{Path, PathBuf};
 
 use skrifa::instance::{LocationRef, Size};
-use skrifa::outline::DrawSettings;
+use skrifa::outline::{DrawSettings, OutlineGlyphFormat};
 use skrifa::raw::TableProvider;
 use skrifa::{FontRef, MetadataProvider};
 
 use crate::error::CoordinateError;
-use crate::pens::{CommandCountPen, PointCollector};
+use crate::pens::{CommandBreakdownPen, CommandCountPen, PointCollector};
 
 fn collect_points_from_font(path: &Path) -> Result<Vec<[f32; 2]>, CoordinateError> {
     let data = fs::read(path).map_err(|err| CoordinateError::Io(path.to_path_buf(), err))?;
@@ -62,4 +62,48 @@ pub fn glyph_command_counts(font_paths: Vec<PathBuf>) -> Result<Vec<u32>, Coordi
         }
     }
     Ok(counts)
+}
+
+pub fn outline_formats(font_paths: Vec<PathBuf>) -> Result<Vec<String>, CoordinateError> {
+    let mut formats = Vec::with_capacity(font_paths.len());
+    for path in font_paths {
+        let data = fs::read(&path).map_err(|err| CoordinateError::Io(path.to_path_buf(), err))?;
+        let font =
+            FontRef::new(&data).map_err(|err| CoordinateError::Read(path.to_path_buf(), err))?;
+        let collection = font.outline_glyphs();
+        let label = match collection.format() {
+            Some(OutlineGlyphFormat::Glyf) => "TrueType",
+            Some(OutlineGlyphFormat::Cff) => "CFF",
+            Some(OutlineGlyphFormat::Cff2) => "CFF2",
+            None => "Unknown",
+        };
+        formats.push(label.to_string());
+    }
+    Ok(formats)
+}
+
+pub fn command_breakdown(font_paths: Vec<PathBuf>) -> Result<([u64; 5], u64), CoordinateError> {
+    let mut totals = [0u64; 5];
+    let mut glyph_count = 0u64;
+    for path in font_paths {
+        let data = fs::read(&path).map_err(|err| CoordinateError::Io(path.to_path_buf(), err))?;
+        let font =
+            FontRef::new(&data).map_err(|err| CoordinateError::Read(path.to_path_buf(), err))?;
+        let outlines = font.outline_glyphs();
+        for (_, glyph) in outlines.iter() {
+            let mut pen = CommandBreakdownPen::default();
+            glyph
+                .draw(
+                    DrawSettings::unhinted(Size::unscaled(), LocationRef::default()),
+                    &mut pen,
+                )
+                .map_err(|err| CoordinateError::Draw(path.to_path_buf(), err))?;
+            let counts = pen.counts();
+            for (total, value) in totals.iter_mut().zip(counts) {
+                *total = total.saturating_add(value);
+            }
+            glyph_count = glyph_count.saturating_add(1);
+        }
+    }
+    Ok((totals, glyph_count))
 }

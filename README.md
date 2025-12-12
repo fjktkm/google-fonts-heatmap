@@ -16,6 +16,7 @@
 - Outline Length Histogram: [PNG](https://fjktkm.github.io/google-fonts-heatmap/outline_len_histplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/outline_len_histplot.pdf)
 - UPEM Countplot: [PNG](https://fjktkm.github.io/google-fonts-heatmap/upem_countplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/upem_countplot.pdf)
 - Weight Countplot: [PNG](https://fjktkm.github.io/google-fonts-heatmap/weight_countplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/weight_countplot.pdf)
+- Outline Command Barplot: [PNG](https://fjktkm.github.io/google-fonts-heatmap/outline_command_barplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/outline_command_barplot.pdf)
 
 ## ✅ 3. Requirements
 
@@ -93,6 +94,12 @@ uv run google_fonts_heatmap/upem_countplot.py
 
 ```bash
 uv run google_fonts_heatmap/weight_countplot.py
+```
+
+**Outline Command Bar Plot**：アウトライン描画コマンドの種類ごとの総数を確認するには次のコマンドを実行してください．
+
+```bash
+uv run google_fonts_heatmap/outline_command_barplot.py
 ```
 
 ## 📑 6. Citation

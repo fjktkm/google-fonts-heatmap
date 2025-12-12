@@ -47,6 +47,21 @@ fn glyph_command_counts(py: Python<'_>, font_paths: Vec<PathBuf>) -> PyResult<Ve
 }
 
 #[pyfunction]
+fn outline_formats(py: Python<'_>, font_paths: Vec<PathBuf>) -> PyResult<Vec<String>> {
+    let formats = py.detach(move || outline::outline_formats(font_paths))?;
+    Ok(formats)
+}
+
+#[pyfunction]
+fn outline_command_breakdown(
+    py: Python<'_>,
+    font_paths: Vec<PathBuf>,
+) -> PyResult<(Vec<u64>, u64)> {
+    let (totals, glyphs) = py.detach(move || outline::command_breakdown(font_paths))?;
+    Ok((totals.to_vec(), glyphs))
+}
+
+#[pyfunction]
 fn weight_classes(py: Python<'_>, font_paths: Vec<PathBuf>) -> PyResult<Vec<u16>> {
     let weights = py.detach(move || metrics::weight_classes(font_paths))?;
     Ok(weights)
@@ -64,6 +79,8 @@ fn _skrifa(_py: Python<'_>, module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add_function(wrap_pyfunction!(glyph_outline_coordinates, module)?)?;
     module.add_function(wrap_pyfunction!(units_per_em, module)?)?;
     module.add_function(wrap_pyfunction!(glyph_command_counts, module)?)?;
+    module.add_function(wrap_pyfunction!(outline_formats, module)?)?;
+    module.add_function(wrap_pyfunction!(outline_command_breakdown, module)?)?;
     module.add_function(wrap_pyfunction!(weight_classes, module)?)?;
     module.add_function(wrap_pyfunction!(coverage_bmp, module)?)?;
     Ok(())
