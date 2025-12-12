@@ -47,6 +47,12 @@ fn glyph_command_counts(py: Python<'_>, font_paths: Vec<PathBuf>) -> PyResult<Ve
 }
 
 #[pyfunction]
+fn weight_classes(py: Python<'_>, font_paths: Vec<PathBuf>) -> PyResult<Vec<u16>> {
+    let weights = py.detach(move || metrics::weight_classes(font_paths))?;
+    Ok(weights)
+}
+
+#[pyfunction]
 fn coverage_bmp(py: Python<'_>, font_paths: Vec<PathBuf>, limit: u32) -> PyResult<Vec<Vec<u32>>> {
     let coverage = py.detach(move || coverage::coverage(font_paths, limit))?;
     Ok(coverage)
@@ -58,6 +64,7 @@ fn _skrifa(_py: Python<'_>, module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add_function(wrap_pyfunction!(glyph_outline_coordinates, module)?)?;
     module.add_function(wrap_pyfunction!(units_per_em, module)?)?;
     module.add_function(wrap_pyfunction!(glyph_command_counts, module)?)?;
+    module.add_function(wrap_pyfunction!(weight_classes, module)?)?;
     module.add_function(wrap_pyfunction!(coverage_bmp, module)?)?;
     Ok(())
 }

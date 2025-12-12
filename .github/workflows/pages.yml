@@ -39,6 +39,9 @@ jobs:
       - name: Create upem countplot
         run: uv run google_fonts_heatmap/upem_countplot.py
 
+      - name: Create weight countplot
+        run: uv run google_fonts_heatmap/weight_countplot.py
+
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

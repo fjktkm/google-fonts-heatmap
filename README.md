@@ -15,6 +15,7 @@
 - Coverage Jointplot: [PNG](https://fjktkm.github.io/google-fonts-heatmap/coverage_jointplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/coverage_jointplot.pdf)
 - Outline Length Histogram: [PNG](https://fjktkm.github.io/google-fonts-heatmap/outline_len_histplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/outline_len_histplot.pdf)
 - UPEM Countplot: [PNG](https://fjktkm.github.io/google-fonts-heatmap/upem_countplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/upem_countplot.pdf)
+- Weight Countplot: [PNG](https://fjktkm.github.io/google-fonts-heatmap/weight_countplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/weight_countplot.pdf)
 
 ## ✅ 3. Requirements
 
@@ -86,6 +87,12 @@ uv run google_fonts_heatmap/outline_len_histplot.py
 
 ```bash
 uv run google_fonts_heatmap/upem_countplot.py
+```
+
+**Weight Count Plot**：フォントの `usWeightClass` の分布を見るには次のコマンドを実行してください．
+
+```bash
+uv run google_fonts_heatmap/weight_countplot.py
 ```
 
 ## 📑 6. Citation
