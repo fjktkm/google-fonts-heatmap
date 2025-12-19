@@ -30,20 +30,8 @@ jobs:
       - name: Build Skrifa extension
         run: uv run maturin develop --release
 
-      - name: Create coverage heatmap
-        run: uv run google_fonts_heatmap/coverage_jointplot.py
-
-      - name: Create outline length histogram
-        run: uv run google_fonts_heatmap/outline_len_histplot.py
-
-      - name: Create upem countplot
-        run: uv run google_fonts_heatmap/upem_countplot.py
-
-      - name: Create weight countplot
-        run: uv run google_fonts_heatmap/weight_countplot.py
-
-      - name: Create outline command barplot
-        run: uv run google_fonts_heatmap/outline_command_barplot.py
+      - name: Create figures
+        run: uv run google_fonts_heatmap
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
