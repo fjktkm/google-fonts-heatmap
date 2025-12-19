@@ -33,8 +33,10 @@ def plot_jointplot(coords: np.ndarray, out_dir: Path, stem: str) -> None:
         y=ys,
         height=7,
         kind="hist",
-        joint_kws={"bins": 512},
-        marginal_kws={"bins": 64},
+        xlim=(-1, 2),
+        ylim=(-1, 2),
+        joint_kws={"binwidth": 3 / 128},
+        marginal_kws={"binwidth": 3 / 64},
     )
     g.set_axis_labels("X coordinate", "Y coordinate")
     g.figure.suptitle("Glyph outline coordinates in Google Fonts")
