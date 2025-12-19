@@ -17,6 +17,7 @@
 - UPEM Countplot: [PNG](https://fjktkm.github.io/google-fonts-heatmap/upem_countplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/upem_countplot.pdf)
 - Weight Countplot: [PNG](https://fjktkm.github.io/google-fonts-heatmap/weight_countplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/weight_countplot.pdf)
 - Outline Command Barplot: [PNG](https://fjktkm.github.io/google-fonts-heatmap/outline_command_barplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/outline_command_barplot.pdf)
+- Outline Coordinate Jointplot: [PNG](https://fjktkm.github.io/google-fonts-heatmap/outline_coord_jointplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/outline_coord_jointplot.pdf)
 
 ## ✅ 3. Requirements
 
@@ -101,6 +102,13 @@ uv run google_fonts_heatmap/weight_countplot.py
 ```bash
 uv run google_fonts_heatmap/outline_command_barplot.py
 ```
+
+**Outline Coordinate Joint Plot**：グリフアウトライン上の座標分布を joint plot で可視化するには次のコマンドを実行してください．
+
+```bash
+uv run google_fonts_heatmap/outline_coord_jointplot.py
+```
+ランダムサンプルした描画コマンドの引数の X 座標・Y 座標をヒストグラムとしてプロットし，頻度の高い領域を確認できます．
 
 ## 📑 6. Citation
 
