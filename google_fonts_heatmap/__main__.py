@@ -21,6 +21,8 @@ MODULES = [
 
 def main() -> None:
     for module in MODULES:
+        name = module.__name__.split(".")[-1]
+        print(name, flush=True)
         module.main()
 
 
