@@ -21,7 +21,7 @@ pub fn units_per_em(font_paths: Vec<PathBuf>) -> Result<Vec<u16>, CoordinateErro
         if instances.is_empty() {
             values.push(upem);
         } else {
-            values.extend(std::iter::repeat(upem).take(instances.len()));
+            values.extend(std::iter::repeat_n(upem, instances.len()));
         }
     }
     Ok(values)

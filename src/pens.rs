@@ -14,10 +14,6 @@ impl PointCollector {
         }
     }
 
-    pub fn into_points(self) -> Vec<[f32; 2]> {
-        self.points
-    }
-
     pub fn clear(&mut self) {
         self.points.clear();
     }

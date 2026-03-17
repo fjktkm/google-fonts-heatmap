@@ -192,7 +192,7 @@ pub fn outline_formats(font_paths: Vec<PathBuf>) -> Result<Vec<String>, Coordina
         if instances.is_empty() {
             formats.push(label.to_string());
         } else {
-            formats.extend(std::iter::repeat(label.to_string()).take(instances.len()));
+            formats.extend(std::iter::repeat_n(label.to_string(), instances.len()));
         }
     }
     Ok(formats)
