@@ -25,6 +25,18 @@ fn concatenate(all_points: Vec<[f32; 2]>, py: Python<'_>) -> PyResult<Py<PyArray
     Ok(array.into_pyarray(py).unbind())
 }
 
+fn concatenate_u32(all_pairs: Vec<[u32; 2]>, py: Python<'_>) -> PyResult<Py<PyArray2<u32>>> {
+    let total = all_pairs.len();
+    let mut flat = Vec::with_capacity(total * 2);
+    for pair in all_pairs {
+        flat.push(pair[0]);
+        flat.push(pair[1]);
+    }
+    let array = Array2::from_shape_vec((total, 2), flat)
+        .map_err(|err| PyValueError::new_err(err.to_string()))?;
+    Ok(array.into_pyarray(py).unbind())
+}
+
 #[pyfunction]
 fn glyph_outline_coordinates(
     py: Python<'_>,
@@ -44,6 +56,15 @@ fn units_per_em(py: Python<'_>, font_paths: Vec<PathBuf>) -> PyResult<Vec<u16>> 
 fn glyph_command_counts(py: Python<'_>, font_paths: Vec<PathBuf>) -> PyResult<Vec<u32>> {
     let counts = py.detach(move || outline::glyph_command_counts(font_paths))?;
     Ok(counts)
+}
+
+#[pyfunction]
+fn glyph_command_and_path_counts(
+    py: Python<'_>,
+    font_paths: Vec<PathBuf>,
+) -> PyResult<Py<PyArray2<u32>>> {
+    let counts = py.detach(move || outline::glyph_command_and_path_counts(font_paths))?;
+    concatenate_u32(counts, py)
 }
 
 #[pyfunction]
@@ -79,6 +100,7 @@ fn _skrifa(_py: Python<'_>, module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add_function(wrap_pyfunction!(glyph_outline_coordinates, module)?)?;
     module.add_function(wrap_pyfunction!(units_per_em, module)?)?;
     module.add_function(wrap_pyfunction!(glyph_command_counts, module)?)?;
+    module.add_function(wrap_pyfunction!(glyph_command_and_path_counts, module)?)?;
     module.add_function(wrap_pyfunction!(outline_formats, module)?)?;
     module.add_function(wrap_pyfunction!(outline_command_breakdown, module)?)?;
     module.add_function(wrap_pyfunction!(weight_classes, module)?)?;

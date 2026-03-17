@@ -20,7 +20,14 @@ pub fn coverage(font_paths: Vec<PathBuf>, limit: u32) -> Result<Vec<Vec<u32>>, C
         let font =
             FontRef::new(&data).map_err(|err| CoordinateError::Read(path.to_path_buf(), err))?;
         let cps = codepoints_under_limit(font.charmap(), limit);
-        coverage.push(cps);
+        let instances = font.named_instances();
+        if instances.is_empty() {
+            coverage.push(cps);
+        } else {
+            for _ in instances.iter() {
+                coverage.push(cps.clone());
+            }
+        }
     }
     Ok(coverage)
 }

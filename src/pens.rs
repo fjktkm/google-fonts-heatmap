@@ -84,6 +84,59 @@ impl OutlinePen for CommandCountPen {
 }
 
 #[derive(Default)]
+pub struct CommandStatsPen {
+    current: u32,
+    max_path: u32,
+    path_total: u32,
+    in_path: bool,
+}
+
+impl CommandStatsPen {
+    pub fn into_counts(mut self) -> [u32; 2] {
+        self.finish_path();
+        [self.max_path, self.path_total]
+    }
+
+    fn hit(&mut self) {
+        self.current = self.current.saturating_add(1);
+    }
+
+    fn finish_path(&mut self) {
+        if self.in_path {
+            self.max_path = self.max_path.max(self.current);
+            self.current = 0;
+            self.in_path = false;
+        }
+    }
+}
+
+impl OutlinePen for CommandStatsPen {
+    fn move_to(&mut self, _x: f32, _y: f32) {
+        self.finish_path();
+        self.path_total = self.path_total.saturating_add(1);
+        self.in_path = true;
+        self.hit();
+    }
+
+    fn line_to(&mut self, _x: f32, _y: f32) {
+        self.hit();
+    }
+
+    fn quad_to(&mut self, _cx0: f32, _cy0: f32, _x: f32, _y: f32) {
+        self.hit();
+    }
+
+    fn curve_to(&mut self, _cx0: f32, _cy0: f32, _cx1: f32, _cy1: f32, _x: f32, _y: f32) {
+        self.hit();
+    }
+
+    fn close(&mut self) {
+        self.hit();
+        self.finish_path();
+    }
+}
+
+#[derive(Default)]
 pub struct CommandBreakdownPen {
     move_to: u64,
     line_to: u64,
