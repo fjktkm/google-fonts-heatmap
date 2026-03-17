@@ -9,10 +9,31 @@ use skrifa::{FontRef, MetadataProvider};
 use crate::error::CoordinateError;
 use crate::pens::{CommandBreakdownPen, CommandCountPen, CommandStatsPen, PointCollector};
 
+struct Rng(u64);
+
+impl Rng {
+    fn new() -> Self {
+        Self(0x517cc1b727220a95)
+    }
+
+    fn next_f64(&mut self) -> f64 {
+        self.0 ^= self.0 << 13;
+        self.0 ^= self.0 >> 7;
+        self.0 ^= self.0 << 17;
+        (self.0 >> 11) as f64 * (1.0 / (1u64 << 53) as f64)
+    }
+
+    fn keep(&mut self, rate: f64) -> bool {
+        self.next_f64() < rate
+    }
+}
+
 fn collect_points_from_font(
     path: &Path,
     font: &FontRef<'_>,
     location: LocationRef<'_>,
+    sample_rate: f64,
+    rng: &mut Rng,
 ) -> Result<Vec<[f32; 2]>, CoordinateError> {
     let upem = font
         .head()
@@ -23,33 +44,50 @@ fn collect_points_from_font(
     let scale = 1.0 / upem;
 
     let outlines = font.outline_glyphs();
+    let mut accumulated = Vec::new();
     let mut collector = PointCollector::new(scale);
     for (_, glyph) in outlines.iter() {
+        collector.clear();
         glyph
             .draw(
                 DrawSettings::unhinted(Size::unscaled(), location),
                 &mut collector,
             )
             .map_err(|err| CoordinateError::Draw(path.to_path_buf(), err))?;
+        for &point in collector.points() {
+            if rng.keep(sample_rate) {
+                accumulated.push(point);
+            }
+        }
     }
-    Ok(collector.into_points())
+    Ok(accumulated)
 }
 
-pub fn outline_coordinates(font_paths: Vec<PathBuf>) -> Result<Vec<[f32; 2]>, CoordinateError> {
+pub fn outline_coordinates(
+    font_paths: Vec<PathBuf>,
+    sample_rate: f64,
+) -> Result<Vec<[f32; 2]>, CoordinateError> {
     let mut accumulated = Vec::new();
+    let mut rng = Rng::new();
     for path in font_paths {
         let data = fs::read(&path).map_err(|err| CoordinateError::Io(path.to_path_buf(), err))?;
         let font =
             FontRef::new(&data).map_err(|err| CoordinateError::Read(path.to_path_buf(), err))?;
         let instances = font.named_instances();
         if instances.is_empty() {
-            let mut per_font = collect_points_from_font(&path, &font, LocationRef::default())?;
+            let mut per_font =
+                collect_points_from_font(&path, &font, LocationRef::default(), sample_rate, &mut rng)?;
             accumulated.append(&mut per_font);
         } else {
             for instance in instances.iter() {
                 let location = instance.location();
-                let mut per_font =
-                    collect_points_from_font(&path, &font, LocationRef::from(&location))?;
+                let mut per_font = collect_points_from_font(
+                    &path,
+                    &font,
+                    LocationRef::from(&location),
+                    sample_rate,
+                    &mut rng,
+                )?;
                 accumulated.append(&mut per_font);
             }
         }

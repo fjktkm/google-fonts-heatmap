@@ -11,22 +11,17 @@ ROOT_DIR = Path("./fonts")
 sns.set_theme(style="white")
 
 
+SAMPLE_RATE = 0.001
+
+
 def collect_all_coordinates(font_paths: list[Path]) -> np.ndarray:
-    coords = _skrifa.glyph_outline_coordinates(font_paths)
+    coords = _skrifa.glyph_outline_coordinates(font_paths, SAMPLE_RATE)
     return np.asarray(coords, dtype=np.float32)
 
 
 def plot_jointplot(coords: np.ndarray, out_dir: Path, stem: str) -> None:
-    ratio = 0.001
-
-    num_coords = coords.shape[0]
-    k = max(1, int(num_coords * ratio))
-
-    rng = np.random.default_rng()
-    idx = rng.choice(num_coords, size=k, replace=False)
-
-    xs = coords[idx, 0]
-    ys = coords[idx, 1]
+    xs = coords[:, 0]
+    ys = coords[:, 1]
 
     g = sns.jointplot(
         x=xs,

@@ -41,8 +41,9 @@ fn concatenate_u32(all_pairs: Vec<[u32; 2]>, py: Python<'_>) -> PyResult<Py<PyAr
 fn glyph_outline_coordinates(
     py: Python<'_>,
     font_paths: Vec<PathBuf>,
+    sample_rate: f64,
 ) -> PyResult<Py<PyArray2<f32>>> {
-    let points = py.detach(move || outline::outline_coordinates(font_paths))?;
+    let points = py.detach(move || outline::outline_coordinates(font_paths, sample_rate))?;
     concatenate(points, py)
 }
 

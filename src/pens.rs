@@ -18,6 +18,14 @@ impl PointCollector {
         self.points
     }
 
+    pub fn clear(&mut self) {
+        self.points.clear();
+    }
+
+    pub fn points(&self) -> &[[f32; 2]] {
+        &self.points
+    }
+
     fn push(&mut self, x: f32, y: f32) {
         self.points.push([x * self.scale, y * self.scale]);
     }
