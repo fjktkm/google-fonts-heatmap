@@ -7,31 +7,18 @@ mod pens;
 use std::path::PathBuf;
 
 use numpy::ndarray::Array2;
-use numpy::{IntoPyArray, PyArray2};
+use numpy::{Element, IntoPyArray, PyArray2};
 use pyo3::exceptions::PyValueError;
 use pyo3::prelude::*;
 use pyo3::types::PyModule;
 use pyo3::Bound;
 
-fn concatenate(all_points: Vec<[f32; 2]>, py: Python<'_>) -> PyResult<Py<PyArray2<f32>>> {
-    let total = all_points.len();
-    let mut flat = Vec::with_capacity(total * 2);
-    for point in all_points {
-        flat.push(point[0]);
-        flat.push(point[1]);
-    }
-    let array = Array2::from_shape_vec((total, 2), flat)
-        .map_err(|err| PyValueError::new_err(err.to_string()))?;
-    Ok(array.into_pyarray(py).unbind())
-}
-
-fn concatenate_u32(all_pairs: Vec<[u32; 2]>, py: Python<'_>) -> PyResult<Py<PyArray2<u32>>> {
-    let total = all_pairs.len();
-    let mut flat = Vec::with_capacity(total * 2);
-    for pair in all_pairs {
-        flat.push(pair[0]);
-        flat.push(pair[1]);
-    }
+fn into_array2<T: Element + Copy>(
+    pairs: Vec<[T; 2]>,
+    py: Python<'_>,
+) -> PyResult<Py<PyArray2<T>>> {
+    let total = pairs.len();
+    let flat: Vec<T> = pairs.into_iter().flatten().collect();
     let array = Array2::from_shape_vec((total, 2), flat)
         .map_err(|err| PyValueError::new_err(err.to_string()))?;
     Ok(array.into_pyarray(py).unbind())
@@ -44,7 +31,7 @@ fn glyph_outline_coordinates(
     sample_rate: f64,
 ) -> PyResult<Py<PyArray2<f32>>> {
     let points = py.detach(move || outline::outline_coordinates(font_paths, sample_rate))?;
-    concatenate(points, py)
+    into_array2(points, py)
 }
 
 #[pyfunction]
@@ -65,7 +52,7 @@ fn glyph_command_and_path_counts(
     font_paths: Vec<PathBuf>,
 ) -> PyResult<Py<PyArray2<u32>>> {
     let counts = py.detach(move || outline::glyph_command_and_path_counts(font_paths))?;
-    concatenate_u32(counts, py)
+    into_array2(counts, py)
 }
 
 #[pyfunction]

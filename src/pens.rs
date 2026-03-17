@@ -150,14 +150,8 @@ pub struct CommandBreakdownPen {
 }
 
 impl CommandBreakdownPen {
-    pub fn counts(&self) -> [u64; 5] {
-        [
-            self.move_to,
-            self.line_to,
-            self.quad_to,
-            self.curve_to,
-            self.close,
-        ]
+    pub fn into_counts(self) -> [u64; 5] {
+        [self.move_to, self.line_to, self.quad_to, self.curve_to, self.close]
     }
 }
 

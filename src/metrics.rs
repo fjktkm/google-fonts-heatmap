@@ -17,12 +17,8 @@ pub fn units_per_em(font_paths: Vec<PathBuf>) -> Result<Vec<u16>, CoordinateErro
             .ok()
             .map(|head| head.units_per_em())
             .unwrap_or(1000);
-        let instances = font.named_instances();
-        if instances.is_empty() {
-            values.push(upem);
-        } else {
-            values.extend(std::iter::repeat_n(upem, instances.len()));
-        }
+        let count = font.named_instances().len().max(1);
+        values.extend(std::iter::repeat_n(upem, count));
     }
     Ok(values)
 }
