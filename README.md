@@ -14,6 +14,7 @@
 - All: [ZIP](https://github.com/fjktkm/google-fonts-heatmap/releases/latest/download/output.zip)
 - Coverage Jointplot: [PNG](https://fjktkm.github.io/google-fonts-heatmap/coverage_jointplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/coverage_jointplot.pdf)
 - Outline Length Histogram: [PNG](https://fjktkm.github.io/google-fonts-heatmap/outline_len_histplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/outline_len_histplot.pdf)
+- Outline Length / Path Count Jointplot: [PNG](https://fjktkm.github.io/google-fonts-heatmap/outline_len_path_jointplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/outline_len_path_jointplot.pdf)
 - UPEM Countplot: [PNG](https://fjktkm.github.io/google-fonts-heatmap/upem_countplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/upem_countplot.pdf)
 - Weight Countplot: [PNG](https://fjktkm.github.io/google-fonts-heatmap/weight_countplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/weight_countplot.pdf)
 - Outline Command Barplot: [PNG](https://fjktkm.github.io/google-fonts-heatmap/outline_command_barplot.png) / [PDF](https://fjktkm.github.io/google-fonts-heatmap/outline_command_barplot.pdf)
@@ -83,6 +84,12 @@ uv run google_fonts_heatmap/coverage_jointplot.py
 
 ```bash
 uv run google_fonts_heatmap/outline_len_histplot.py
+```
+
+**Outline Length / Path Count Jointplot**：横軸にアウトライン長，縦軸にパス数（`closePath` コマンド数）を取った joint plot を描くには次のコマンドを実行してください．
+
+```bash
+uv run google_fonts_heatmap/outline_len_path_jointplot.py
 ```
 
 **UPEM Count Plot**：フォントごとの unitsPerEm の頻度を調べるには次のコマンドを実行してください．

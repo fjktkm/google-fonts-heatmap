@@ -3,12 +3,14 @@ from google_fonts_heatmap import (
     outline_command_barplot,
     outline_coord_jointplot,
     outline_len_histplot,
+    outline_len_path_jointplot,
     upem_countplot,
     weight_countplot,
 )
 
 MODULES = [
     outline_len_histplot,
+    outline_len_path_jointplot,
     outline_coord_jointplot,
     outline_command_barplot,
     coverage_jointplot,
