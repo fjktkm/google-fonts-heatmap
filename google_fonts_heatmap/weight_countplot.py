@@ -20,6 +20,7 @@ def plot_weight_countplot(weights: list[int], out_dir: Path, stem: str) -> None:
 
     fig, ax = plt.subplots(figsize=(8, 5))
     sns.countplot(x=labels, ax=ax, order=sorted(set(labels), key=int))
+    plt.setp(ax.get_xticklabels(), rotation=90)
     ax.set_xlabel("OS/2 usWeightClass")
     ax.set_ylabel("Font count")
     ax.set_title("Font weight distribution in Google Fonts")
