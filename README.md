@@ -2,7 +2,7 @@
 
 ## 📌 1. Overview
 
-[![](https://fjktkm.github.io/google-fonts-analysis/coverage_jointplot.png)](https://fjktkm.github.io/google-fonts-analysis/coverage_jointplot.png)
+[![](https://torchfont.github.io/google-fonts-analysis/coverage_jointplot.png)](https://torchfont.github.io/google-fonts-analysis/coverage_jointplot.png)
 
 [Google Fonts](https://github.com/google/fonts) に含まれるフォントを対象に，文字の収録状況，アウトライン，メタデータを集計・可視化します．
 
@@ -11,14 +11,14 @@
 
 ## 📥 2. Download
 
-- All: [ZIP](https://github.com/fjktkm/google-fonts-analysis/releases/latest/download/output.zip)
-- Coverage Jointplot: [PNG](https://fjktkm.github.io/google-fonts-analysis/coverage_jointplot.png) / [PDF](https://fjktkm.github.io/google-fonts-analysis/coverage_jointplot.pdf)
-- Outline Length Histogram: [PNG](https://fjktkm.github.io/google-fonts-analysis/outline_len_histplot.png) / [PDF](https://fjktkm.github.io/google-fonts-analysis/outline_len_histplot.pdf)
-- Outline Length / Path Count Jointplot: [PNG](https://fjktkm.github.io/google-fonts-analysis/outline_len_path_jointplot.png) / [PDF](https://fjktkm.github.io/google-fonts-analysis/outline_len_path_jointplot.pdf)
-- UPEM Countplot: [PNG](https://fjktkm.github.io/google-fonts-analysis/upem_countplot.png) / [PDF](https://fjktkm.github.io/google-fonts-analysis/upem_countplot.pdf)
-- Weight Countplot: [PNG](https://fjktkm.github.io/google-fonts-analysis/weight_countplot.png) / [PDF](https://fjktkm.github.io/google-fonts-analysis/weight_countplot.pdf)
-- Outline Command Barplot: [PNG](https://fjktkm.github.io/google-fonts-analysis/outline_command_barplot.png) / [PDF](https://fjktkm.github.io/google-fonts-analysis/outline_command_barplot.pdf)
-- Outline Coordinate Jointplot: [PNG](https://fjktkm.github.io/google-fonts-analysis/outline_coord_jointplot.png) / [PDF](https://fjktkm.github.io/google-fonts-analysis/outline_coord_jointplot.pdf)
+- All: [ZIP](https://github.com/torchfont/google-fonts-analysis/releases/latest/download/output.zip)
+- Coverage Jointplot: [PNG](https://torchfont.github.io/google-fonts-analysis/coverage_jointplot.png) / [PDF](https://torchfont.github.io/google-fonts-analysis/coverage_jointplot.pdf)
+- Outline Length Histogram: [PNG](https://torchfont.github.io/google-fonts-analysis/outline_len_histplot.png) / [PDF](https://torchfont.github.io/google-fonts-analysis/outline_len_histplot.pdf)
+- Outline Length / Path Count Jointplot: [PNG](https://torchfont.github.io/google-fonts-analysis/outline_len_path_jointplot.png) / [PDF](https://torchfont.github.io/google-fonts-analysis/outline_len_path_jointplot.pdf)
+- UPEM Countplot: [PNG](https://torchfont.github.io/google-fonts-analysis/upem_countplot.png) / [PDF](https://torchfont.github.io/google-fonts-analysis/upem_countplot.pdf)
+- Weight Countplot: [PNG](https://torchfont.github.io/google-fonts-analysis/weight_countplot.png) / [PDF](https://torchfont.github.io/google-fonts-analysis/weight_countplot.pdf)
+- Outline Command Barplot: [PNG](https://torchfont.github.io/google-fonts-analysis/outline_command_barplot.png) / [PDF](https://torchfont.github.io/google-fonts-analysis/outline_command_barplot.pdf)
+- Outline Coordinate Jointplot: [PNG](https://torchfont.github.io/google-fonts-analysis/outline_coord_jointplot.png) / [PDF](https://torchfont.github.io/google-fonts-analysis/outline_coord_jointplot.pdf)
 
 ## ✅ 3. Requirements
 
@@ -125,7 +125,7 @@ If you find this repository useful in your work, please consider citing the foll
 @misc{fujioka2025googlefontsanalysis,
   author       = {{Takumu Fujioka}},
   title        = {{google-fonts-analysis}: Analysis and Visualization of Google Fonts},
-  howpublished = {GitHub repository, \url{https://github.com/fjktkm/google-fonts-analysis}},
+  howpublished = {GitHub repository, \url{https://github.com/torchfont/google-fonts-analysis}},
   year         = {2025},
 }
 ```
