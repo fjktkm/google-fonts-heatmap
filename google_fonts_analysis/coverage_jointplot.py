@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 
-from google_fonts_heatmap import _skrifa
+from google_fonts_analysis import _skrifa
 
 ROOT_DIR = Path("data/google/fonts")
 CHARACTER_SIZE = 0x10000

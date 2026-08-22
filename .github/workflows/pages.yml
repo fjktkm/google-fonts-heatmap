@@ -25,7 +25,7 @@ jobs:
         uses: astral-sh/setup-uv@v6
 
       - name: Create figures
-        run: uv run google_fonts_heatmap
+        run: uv run google_fonts_analysis
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3

@@ -1,4 +1,4 @@
-from google_fonts_heatmap import (
+from google_fonts_analysis import (
     coverage_jointplot,
     outline_command_barplot,
     outline_coord_jointplot,

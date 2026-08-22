@@ -108,7 +108,7 @@ wheels = [
 ]
 
 [[package]]
-name = "google-fonts-heatmap"
+name = "google-fonts-analysis"
 source = { editable = "." }
 dependencies = [
     { name = "matplotlib" },

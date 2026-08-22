@@ -38,7 +38,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "google-fonts-heatmap"
+name = "google-fonts-analysis"
 version = "0.1.0"
 dependencies = [
  "numpy",

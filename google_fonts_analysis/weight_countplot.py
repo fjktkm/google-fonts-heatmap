@@ -3,7 +3,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from google_fonts_heatmap import _skrifa
+from google_fonts_analysis import _skrifa
 
 ROOT_DIR = Path("data/google/fonts")
 

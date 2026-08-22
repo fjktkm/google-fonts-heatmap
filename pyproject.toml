@@ -3,8 +3,8 @@ requires = ["maturin>=1.14,<2.0"]
 build-backend = "maturin"
 
 [project]
-name = "google-fonts-heatmap"
-description = "Heatmap of Google Fonts"
+name = "google-fonts-analysis"
+description = "Analysis and visualization of Google Fonts"
 readme = "README.md"
 requires-python = ">=3.13"
 classifiers = [
@@ -26,7 +26,7 @@ dev = [
 ]
 
 [tool.maturin]
-module-name = "google_fonts_heatmap._skrifa"
+module-name = "google_fonts_analysis._skrifa"
 exclude = [
     "**/__pycache__",
     "**/*.pyc",
@@ -41,6 +41,6 @@ select = ["ALL"]
 ignore = ["D", "T", "EXE"]
 
 [tool.ruff.lint.per-file-ignores]
-"google_fonts_heatmap/outline_len_histplot.py" = ["N802", "ARG002"]
-"google_fonts_heatmap/outline_coord_jointplot.py" = ["N802"]
-"google_fonts_heatmap/outline_len_path_jointplot.py" = ["N802"]
+"google_fonts_analysis/outline_len_histplot.py" = ["N802", "ARG002"]
+"google_fonts_analysis/outline_coord_jointplot.py" = ["N802"]
+"google_fonts_analysis/outline_len_path_jointplot.py" = ["N802"]
