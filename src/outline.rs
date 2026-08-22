@@ -1,7 +1,7 @@
 use std::fs;
 use std::path::{Path, PathBuf};
 
-use skrifa::instance::{Location, LocationRef, Size};
+use skrifa::instance::{LocationRef, Size};
 use skrifa::outline::{DrawSettings, OutlineGlyphFormat};
 use skrifa::raw::TableProvider;
 use skrifa::{FontRef, MetadataProvider};
@@ -24,19 +24,9 @@ impl Rng {
     }
 }
 
-fn instance_locations(font: &FontRef<'_>) -> Vec<Option<Location>> {
-    let instances = font.named_instances();
-    if instances.is_empty() {
-        vec![None]
-    } else {
-        instances.iter().map(|i| Some(i.location())).collect()
-    }
-}
-
 fn collect_points_from_font(
     path: &Path,
     font: &FontRef<'_>,
-    location: LocationRef<'_>,
     sample_rate: f64,
     rng: &mut Rng,
 ) -> Result<Vec<[f32; 2]>, CoordinateError> {
@@ -51,11 +41,14 @@ fn collect_points_from_font(
     let outlines = font.outline_glyphs();
     let mut accumulated = Vec::new();
     let mut collector = PointCollector::new(scale);
-    for (_, glyph) in outlines.iter() {
+    for (_, glyph_id) in font.charmap().mappings() {
+        let Some(glyph) = outlines.get(glyph_id) else {
+            continue;
+        };
         collector.clear();
         glyph
             .draw(
-                DrawSettings::unhinted(Size::unscaled(), location),
+                DrawSettings::unhinted(Size::unscaled(), LocationRef::default()),
                 &mut collector,
             )
             .map_err(|err| CoordinateError::Draw(path.to_path_buf(), err))?;
@@ -78,18 +71,12 @@ pub fn outline_coordinates(
         let data = fs::read(&path).map_err(|err| CoordinateError::Io(path.to_path_buf(), err))?;
         let font =
             FontRef::new(&data).map_err(|err| CoordinateError::Read(path.to_path_buf(), err))?;
-        for loc in instance_locations(&font) {
-            let location = loc
-                .as_ref()
-                .map_or(LocationRef::default(), LocationRef::from);
-            accumulated.append(&mut collect_points_from_font(
-                &path,
-                &font,
-                location,
-                sample_rate,
-                &mut rng,
-            )?);
-        }
+        accumulated.append(&mut collect_points_from_font(
+            &path,
+            &font,
+            sample_rate,
+            &mut rng,
+        )?);
     }
     Ok(accumulated)
 }
@@ -101,17 +88,18 @@ pub fn glyph_command_counts(font_paths: Vec<PathBuf>) -> Result<Vec<u32>, Coordi
         let font =
             FontRef::new(&data).map_err(|err| CoordinateError::Read(path.to_path_buf(), err))?;
         let outlines = font.outline_glyphs();
-        for loc in instance_locations(&font) {
-            let location = loc
-                .as_ref()
-                .map_or(LocationRef::default(), LocationRef::from);
-            for (_, glyph) in outlines.iter() {
-                let mut pen = CommandCountPen::default();
-                glyph
-                    .draw(DrawSettings::unhinted(Size::unscaled(), location), &mut pen)
-                    .map_err(|err| CoordinateError::Draw(path.to_path_buf(), err))?;
-                counts.push(pen.into_count());
-            }
+        for (_, glyph_id) in font.charmap().mappings() {
+            let Some(glyph) = outlines.get(glyph_id) else {
+                continue;
+            };
+            let mut pen = CommandCountPen::default();
+            glyph
+                .draw(
+                    DrawSettings::unhinted(Size::unscaled(), LocationRef::default()),
+                    &mut pen,
+                )
+                .map_err(|err| CoordinateError::Draw(path.to_path_buf(), err))?;
+            counts.push(pen.into_count());
         }
     }
     Ok(counts)
@@ -126,17 +114,18 @@ pub fn glyph_command_and_path_counts(
         let font =
             FontRef::new(&data).map_err(|err| CoordinateError::Read(path.to_path_buf(), err))?;
         let outlines = font.outline_glyphs();
-        for loc in instance_locations(&font) {
-            let location = loc
-                .as_ref()
-                .map_or(LocationRef::default(), LocationRef::from);
-            for (_, glyph) in outlines.iter() {
-                let mut pen = CommandStatsPen::default();
-                glyph
-                    .draw(DrawSettings::unhinted(Size::unscaled(), location), &mut pen)
-                    .map_err(|err| CoordinateError::Draw(path.to_path_buf(), err))?;
-                counts.push(pen.into_counts());
-            }
+        for (_, glyph_id) in font.charmap().mappings() {
+            let Some(glyph) = outlines.get(glyph_id) else {
+                continue;
+            };
+            let mut pen = CommandStatsPen::default();
+            glyph
+                .draw(
+                    DrawSettings::unhinted(Size::unscaled(), LocationRef::default()),
+                    &mut pen,
+                )
+                .map_err(|err| CoordinateError::Draw(path.to_path_buf(), err))?;
+            counts.push(pen.into_counts());
         }
     }
     Ok(counts)
@@ -154,8 +143,7 @@ pub fn outline_formats(font_paths: Vec<PathBuf>) -> Result<Vec<String>, Coordina
             Some(OutlineGlyphFormat::Cff2) => "CFF2",
             None => "Unknown",
         };
-        let count = font.named_instances().len().max(1);
-        formats.extend(std::iter::repeat_n(label.to_string(), count));
+        formats.push(label.to_string());
     }
     Ok(formats)
 }
@@ -168,20 +156,21 @@ pub fn command_breakdown(font_paths: Vec<PathBuf>) -> Result<([u64; 5], u64), Co
         let font =
             FontRef::new(&data).map_err(|err| CoordinateError::Read(path.to_path_buf(), err))?;
         let outlines = font.outline_glyphs();
-        for loc in instance_locations(&font) {
-            let location = loc
-                .as_ref()
-                .map_or(LocationRef::default(), LocationRef::from);
-            for (_, glyph) in outlines.iter() {
-                let mut pen = CommandBreakdownPen::default();
-                glyph
-                    .draw(DrawSettings::unhinted(Size::unscaled(), location), &mut pen)
-                    .map_err(|err| CoordinateError::Draw(path.to_path_buf(), err))?;
-                for (total, value) in totals.iter_mut().zip(pen.into_counts()) {
-                    *total = total.saturating_add(value);
-                }
-                glyph_count = glyph_count.saturating_add(1);
+        for (_, glyph_id) in font.charmap().mappings() {
+            let Some(glyph) = outlines.get(glyph_id) else {
+                continue;
+            };
+            let mut pen = CommandBreakdownPen::default();
+            glyph
+                .draw(
+                    DrawSettings::unhinted(Size::unscaled(), LocationRef::default()),
+                    &mut pen,
+                )
+                .map_err(|err| CoordinateError::Draw(path.to_path_buf(), err))?;
+            for (total, value) in totals.iter_mut().zip(pen.into_counts()) {
+                *total = total.saturating_add(value);
             }
+            glyph_count = glyph_count.saturating_add(1);
         }
     }
     Ok((totals, glyph_count))

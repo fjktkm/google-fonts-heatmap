@@ -16,8 +16,7 @@ pub fn coverage(font_paths: Vec<PathBuf>, limit: u32) -> Result<Vec<Vec<u32>>, C
             .mappings()
             .filter_map(|(cp, _)| (cp < limit).then_some(cp))
             .collect();
-        let count = font.named_instances().len().max(1);
-        coverage.extend(std::iter::repeat_n(cps, count));
+        coverage.push(cps);
     }
     Ok(coverage)
 }
