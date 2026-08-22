@@ -16,10 +16,13 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
-      - name: Download Google Fonts
-        run: sh download.sh
+      - name: Checkout Google Fonts
+        uses: actions/checkout@v7
+        with:
+          repository: google/fonts
+          path: data/google/fonts
 
       - name: Install uv
         uses: astral-sh/setup-uv@v6
