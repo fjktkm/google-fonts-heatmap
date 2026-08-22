@@ -1,8 +1,11 @@
 {
     "recommendations": [
+        "astral-sh.ty",
         "charliermarsh.ruff",
-        "ms-azuretools.vscode-docker",
-        "ms-python.python",
-        "tamasfe.even-better-toml",
+        "rust-lang.rust-analyzer",
+        "tamasfe.even-better-toml"
+    ],
+    "unwantedRecommendations": [
+        "ms-python.vscode-pylance"
     ]
 }

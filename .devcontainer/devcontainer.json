@@ -1,14 +1,12 @@
 {
-	"name": "uv",
-	"image": "ghcr.io/astral-sh/uv:python3.13-trixie",
-	"features": {
-		"ghcr.io/devcontainers/features/common-utils:2": {},
-		"ghcr.io/devcontainers/features/rust:1": {}
+	"name": "maturin (uv)",
+	"build": {
+		"dockerfile": "Dockerfile"
 	},
 	"mounts": [
 		{
-			"source": "uv-cache",
-			"target": "/root/.cache/uv",
+			"source": "uv",
+			"target": "/home/vscode/.cache/uv",
 			"type": "volume"
 		},
 		{
@@ -20,23 +18,24 @@
 			"type": "volume"
 		},
 		{
-			"source": "google-fonts-heatmap-fonts",
-			"target": "${containerWorkspaceFolder}/fonts",
+			"source": "data-${devcontainerId}",
+			"target": "${containerWorkspaceFolder}/data",
 			"type": "volume"
 		}
 	],
 	"containerEnv": {
 		"UV_LINK_MODE": "copy"
 	},
-	"postCreateCommand": "uv sync",
+	"onCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.cache/uv .venv target data && uv sync",
 	"customizations": {
 		"vscode": {
 			"extensions": [
+				"astral-sh.ty",
 				"charliermarsh.ruff",
-				"ms-python.python",
 				"rust-lang.rust-analyzer",
 				"tamasfe.even-better-toml"
 			]
 		}
-	}
+	},
+	"remoteUser": "vscode"
 }
