@@ -141,6 +141,7 @@ pub fn outline_formats(font_paths: Vec<PathBuf>) -> Result<Vec<String>, Coordina
             Some(OutlineGlyphFormat::Glyf) => "TrueType",
             Some(OutlineGlyphFormat::Cff) => "CFF",
             Some(OutlineGlyphFormat::Cff2) => "CFF2",
+            Some(OutlineGlyphFormat::Varc) => "VARC",
             None => "Unknown",
         };
         formats.push(label.to_string());
