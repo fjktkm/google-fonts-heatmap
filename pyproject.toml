@@ -1,13 +1,18 @@
 [build-system]
-requires = ["maturin>=1.8,<2.0"]
+requires = ["maturin>=1.14,<2.0"]
 build-backend = "maturin"
 
 [project]
 name = "google-fonts-heatmap"
-version = "0.1.0"
 description = "Heatmap of Google Fonts"
 readme = "README.md"
 requires-python = ">=3.13"
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+dynamic = ["version"]
 dependencies = [
     "matplotlib>=3.10.5",
     "numpy>=2.3.1",
@@ -17,11 +22,16 @@ dependencies = [
 [dependency-groups]
 dev = [
     "ruff>=0.12.4",
-    "maturin>=1.8.0",
+    "maturin>=1.14",
 ]
 
 [tool.maturin]
 module-name = "google_fonts_heatmap._skrifa"
+exclude = [
+    "**/__pycache__",
+    "**/*.pyc",
+    "**/*.pyo",
+]
 
 [tool.ruff]
 unsafe-fixes = true
