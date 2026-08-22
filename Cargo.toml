@@ -10,4 +10,4 @@ crate-type = ["cdylib"]
 [dependencies]
 numpy = "0.29.0"
 pyo3 = "0.29.0"
-skrifa = "0.39.0"
+skrifa = "0.46.0"
