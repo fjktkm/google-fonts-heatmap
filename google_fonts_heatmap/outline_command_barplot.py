@@ -6,7 +6,7 @@ import seaborn as sns
 
 from google_fonts_heatmap import _skrifa
 
-ROOT_DIR = Path("./fonts")
+ROOT_DIR = Path("data/google/fonts")
 
 COMMAND_LABELS = ["moveTo", "lineTo", "quadTo", "curveTo", "closePath"]
 
@@ -41,7 +41,12 @@ def plot_command_barplot(
 
 
 def main() -> None:
-    font_paths = list(ROOT_DIR.rglob("*.[tToO][tT][fF]"))
+    font_paths = [
+        path
+        for directory in ("apache", "ofl", "ufl")
+        for path in ROOT_DIR.glob(f"{directory}/*/*.[tToO][tT][fF]")
+        if path != ROOT_DIR / "ofl/adobeblank/AdobeBlank-Regular.ttf"
+    ]
     per_glyph = collect_command_breakdown(font_paths)
     plot_command_barplot(per_glyph, Path("output"), stem="outline_command_barplot")
 

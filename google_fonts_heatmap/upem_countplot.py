@@ -6,7 +6,7 @@ import seaborn as sns
 
 from google_fonts_heatmap import _skrifa
 
-ROOT_DIR = Path("./fonts")
+ROOT_DIR = Path("data/google/fonts")
 
 sns.set_theme(style="white")
 
@@ -44,7 +44,12 @@ def plot_upem_count(upems: list[int], out_dir: Path, stem: str) -> None:
 
 
 def main() -> None:
-    font_paths = list(ROOT_DIR.rglob("*.[tToO][tT][fF]"))
+    font_paths = [
+        path
+        for directory in ("apache", "ofl", "ufl")
+        for path in ROOT_DIR.glob(f"{directory}/*/*.[tToO][tT][fF]")
+        if path != ROOT_DIR / "ofl/adobeblank/AdobeBlank-Regular.ttf"
+    ]
     upems = collect_upems(font_paths)
     out_dir = Path("output")
     plot_upem_count(upems, out_dir, stem="upem_countplot")
